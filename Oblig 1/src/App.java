@@ -11,6 +11,8 @@ public class App {
         System.out.println("Write your age: ");
         int age = Integer.parseInt(scanner.nextLine());
         
+        scanner.close();
+        
         Person person = new Person(name, lname, age);
         Person person2 = new Person("John", "Doe", 30);
     

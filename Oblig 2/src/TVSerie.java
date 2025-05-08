@@ -19,7 +19,7 @@ public class TVSerie {
     public void leggTilEpisoder(Episode episode) {
         if (episode.getSesongNummer() != 0 && episode.getSesongNummer() <= antallSesonger + 1 ){
             episodeListe.add(episode);
-            oppdaterHjennomsnittligSpilletid();
+            oppdaterGjennomsnittligSpilletid();
             if (episode.getSesongNummer() > antallSesonger){
                 antallSesonger += 1;
             }
@@ -28,7 +28,7 @@ public class TVSerie {
         }
     }
 
-    private void oppdaterHjennomsnittligSpilletid() {
+    private void oppdaterGjennomsnittligSpilletid() {
         int totalSpilletid = 0;
         for (Episode episode : episodeListe) {
             totalSpilletid += episode.getSpilletid();

@@ -6,6 +6,8 @@ public class TVSerie {
     private String beskrivelse;
     private LocalDate utgivelsesdato;
     private ArrayList<Episode> episodeListe;
+    private int gjennomsnittligSpilletid;
+    private int antallSesonger;
 
     public TVSerie(String tittel, String beskrivelse, LocalDate utgivelsesdato){
         this.tittel = tittel;
@@ -15,7 +17,23 @@ public class TVSerie {
     }
 
     public void leggTilEpisoder(Episode episode) {
-        episodeListe.add(episode);
+        if (episode.getSesongNummer() != 0 && episode.getSesongNummer() <= antallSesonger + 1 ){
+            episodeListe.add(episode);
+            oppdaterHjennomsnittligSpilletid();
+            if (episode.getSesongNummer() > antallSesonger){
+                antallSesonger += 1;
+            }
+        } else {
+            System.out.println("\n" + "Sesongnummeret er ikke gyldig eller er større en logiske antall sesonger." + "\n");
+        }
+    }
+
+    private void oppdaterHjennomsnittligSpilletid() {
+        int totalSpilletid = 0;
+        for (Episode episode : episodeListe) {
+            totalSpilletid += episode.getSpilletid();
+        }
+        gjennomsnittligSpilletid = totalSpilletid / episodeListe.size();
     }
     
     public String getTittel() {
@@ -38,6 +56,12 @@ public class TVSerie {
     }
     public ArrayList<Episode> getEpisodeListe() {
         return new ArrayList<>(episodeListe);
+    }
+    public int getGjennomsnittligSpilletid() {
+        return gjennomsnittligSpilletid;
+    }
+    public int getAntallSesonger() {
+        return antallSesonger;
     }
 
     public String getEpisodeListeString() {
@@ -62,6 +86,8 @@ public class TVSerie {
     public String toString() {
         return "\n" + "Tittel: " + tittel + " - " + utgivelsesdato.getYear() + "\n" + 
         "Beskrivelse: " + beskrivelse + "\n" + 
-        "Utgivelses dato: " + utgivelsesdato + "\n";
+        "Utgivelses dato: " + utgivelsesdato + "\n" +
+        "Gjennomsnittlig spilletid: " + gjennomsnittligSpilletid + " min" + "\n" +
+        "Antall sesonger: " + antallSesonger + "\n";
     }
 }

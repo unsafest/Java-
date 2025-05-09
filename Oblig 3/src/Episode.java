@@ -1,34 +1,26 @@
+import java.time.LocalDate;
+
 public class Episode extends Produksjon {
-    private String tittel, beskrivelse;
     private int episodeNummer;
     private int sesongNummer;
-    private int spilletid;
 
-    public Episode(String tittel, String beskrivelse, int episodeNummer, int sesongNummer, int spilletid) {
-        this.tittel = tittel;
-        this.beskrivelse = beskrivelse;
+    public Episode(String tittel, String beskrivelse, int episodeNummer, int sesongNummer, int spilletid, LocalDate utgivelsesdato) {
+        super(tittel, beskrivelse, spilletid, utgivelsesdato);
         this.episodeNummer = episodeNummer;
         this.sesongNummer = sesongNummer;
-        this.spilletid = spilletid;
+    }
+    public Episode(String tittel, String beskrivelse, int episodeNummer, int sesongNummer, int spilletid, LocalDate utgivelsesdato, Person regissor) {
+        super(tittel, beskrivelse, spilletid, utgivelsesdato);
+        this.episodeNummer = episodeNummer;
+        this.sesongNummer = sesongNummer;
+        setRegissor(regissor);
     }
     public Episode(String tittel, int episodeNummer, int sesongNummer) {
-        this.tittel = tittel;
+        super(tittel, "", 0, null);
         this.episodeNummer = episodeNummer;
         this.sesongNummer = sesongNummer;
     }
 
-    public String getTittel() {
-        return tittel;
-    }
-    public void setTittel(String tittel) {
-        this.tittel = tittel;
-    }
-    public String getBeskrivelse() {
-        return beskrivelse;
-    }
-    public void setBeskrivelse(String beskrivelse) {
-        this.beskrivelse = beskrivelse;
-    }
     public int getEpisodeNummer() {
         return episodeNummer;
     }
@@ -41,15 +33,10 @@ public class Episode extends Produksjon {
     public void setSesong(int sesongNummer) {
         this.sesongNummer = sesongNummer;
     }
-    public int getSpilletid() {
-        return spilletid;
-    }
-    public void setSpilletid(int spilletid) {
-        this.spilletid = spilletid;
-    }
+
     @Override
     public String toString(){
         return "E" + episodeNummer + "S" + sesongNummer + 
-        ": " + tittel + " (" + spilletid + " min)";
+        ": " + getTittel() + " (" + getSpilletid() + " min)";
     }
 }

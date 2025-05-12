@@ -32,4 +32,8 @@ public class Person {
     public void setfDato(LocalDate fDato) {
         this.fDato = fDato;
     }
+    @Override
+    public String toString() {
+        return getFullNavn() + " (" + fDato + ") ";
+    }
 }

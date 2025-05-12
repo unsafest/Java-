@@ -13,6 +13,7 @@ public class Produksjon {
         this.beskrivelse = beskrivelse;
         this.spilletid = spilletid;
         this.utgivelsesdato = utgivelsesdato;
+        this.rolleListe = new ArrayList<>();
     }
 
     public void leggTilEnRolle(Rolle enRolle) {
@@ -57,5 +58,12 @@ public class Produksjon {
     }
     public ArrayList<Rolle> getRolleListe() {
         return rolleListe;
+    }
+    
+    @Override
+    public String toString() {
+        return "Tittel: " + getTittel() + "\n" +
+               "Beskrivelse: " + getBeskrivelse() + "\n" +
+               "Utgivelsesdato: " + getUtgivelsesdato() + "\n";
     }
 }

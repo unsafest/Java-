@@ -36,7 +36,7 @@ public class Episode extends Produksjon {
 
     @Override
     public String toString(){
-        return "E" + episodeNummer + "S" + sesongNummer + 
+        return "E" + getEpisodeNummer() + "S" + getSesongNummer() + 
         ": " + getTittel() + " (" + getSpilletid() + " min)";
     }
 }

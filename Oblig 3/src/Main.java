@@ -25,16 +25,39 @@ public class Main {
         
         System.out.println(houseMD);
         
+        Person greg = new Person("Hugh", "Laurie", LocalDate.of(1959, 6, 11));
+        Person wilson = new Person("Robert", "Leonard", LocalDate.of(1969, 6, 28));
+
+        Rolle drHouse = new Rolle("Gregory", "House", greg);
+        Rolle drWilson = new Rolle("James", "Wilson", wilson);
+
         for (Episode episode : houseMDEpisoder) {
+            episode.leggTilEnRolle(drHouse);
+            if (episode.getEpisodeNummer() % 2 == 0) {
+                episode.leggTilEnRolle(drWilson);
+            }
+
             System.out.println(episode); // + " " + episode.getRegissor().getFullNavn()
         }
+        
+        for (Rolle rolle : houseMD.hentRollebesetning()) {
+            System.out.println(rolle);
+        }
+        houseMD.hentAlleRoller();
+        
         Episode episode42 = new Episode("It's lupus", "This time it's actually lupus", 1, 7, 50, null);
         houseMD.leggTilEpisoder(episode42);
         
         System.out.println("Antall sesnonger: " + houseMD.getAntallSesonger() + "\n");
         
         conclave.setRegissor(person);
+        
+        conclave.leggTilEnRolle(drHouse);
+
         System.out.println(conclave.getTittel() + "\n" + 
-        "Directed by: " + conclave.getRegissor().getFullNavn());
+        "Directed by: " + conclave.getRegissor().getFullNavn() + "\n" +
+        "Starring: " + conclave.getRolleListe().get(0).getSkuespiller().getFullNavn() + 
+        " as " + conclave.getRolleListe().get(0).getRolleFornavn() + " " + conclave.getRolleListe().get(0).getRolleEtternavn());
+
     }
 }

@@ -1,5 +1,8 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class TVSerie {
     private String tittel;
@@ -34,6 +37,27 @@ public class TVSerie {
             totalSpilletid += episode.getSpilletid();
         }
         gjennomsnittligSpilletid = totalSpilletid / episodeListe.size();
+    }
+
+    public ArrayList<Rolle> hentRollebesetning() {
+        ArrayList<Rolle> alleRoller = new ArrayList<>();
+        for (Episode episode : episodeListe) {
+            alleRoller.addAll(episode.getRolleListe());
+        }
+        return new ArrayList<>(alleRoller.stream().distinct().collect(Collectors.toList()));
+    }
+    public void hentAlleRoller() {
+        HashMap<Person, Integer> rolleMap = new HashMap<>();
+        for (Episode episode : episodeListe) {
+            for (Rolle rolle : episode.getRolleListe()) {
+                Person skuespiller = rolle.getSkuespiller();
+                rolleMap.merge(skuespiller, 1, Integer::sum);
+            }
+        }
+        System.out.println("\nSkuepillere og antall episoder: ");
+        for (Map.Entry<Person,Integer> entry : rolleMap.entrySet()) {
+            System.out.println(entry.getKey().getFullNavn() + " - " + entry.getValue() + " episoder");
+        }
     }
     
     public String getTittel() {
@@ -84,10 +108,10 @@ public class TVSerie {
 
     @Override
     public String toString() {
-        return "\n" + "Tittel: " + tittel + " - " + utgivelsesdato.getYear() + "\n" + 
-        "Beskrivelse: " + beskrivelse + "\n" + 
-        "Utgivelses dato: " + utgivelsesdato + "\n" +
-        "Gjennomsnittlig spilletid: " + gjennomsnittligSpilletid + " min" + "\n" +
-        "Antall sesonger: " + antallSesonger + "\n";
+        return "\n" + "Tittel: " + getTittel() + " - " + getUtgivelsesdato().getYear() + "\n" + 
+        "Beskrivelse: " + getBeskrivelse() + "\n" + 
+        "Utgivelses dato: " + getUtgivelsesdato() + "\n" +
+        "Gjennomsnittlig spilletid: " + getGjennomsnittligSpilletid() + " min" + "\n" +
+        "Antall sesonger: " + getAntallSesonger() + "\n";
     }
 }

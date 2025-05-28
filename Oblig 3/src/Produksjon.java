@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Produksjon {
+public abstract class Produksjon {
     private String tittel, beskrivelse;
     private int spilletid;
     private LocalDate utgivelsesdato;

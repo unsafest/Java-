@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class TVSerie {
+public class TVSerie implements Comparable<TVSerie> {
     private String tittel;
     private String beskrivelse;
     private LocalDate utgivelsesdato;
@@ -113,5 +113,10 @@ public class TVSerie {
         "Utgivelses dato: " + getUtgivelsesdato() + "\n" +
         "Gjennomsnittlig spilletid: " + getGjennomsnittligSpilletid() + " min" + "\n" +
         "Antall sesonger: " + getAntallSesonger() + "\n";
+    }
+
+    @Override
+    public int compareTo(TVSerie o) {
+        return this.tittel.compareTo(o.tittel);
     }
 }

@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 
-public class Episode extends Produksjon {
+public class Episode extends Produksjon implements Comparable<Episode> {
     private int episodeNummer;
     private int sesongNummer;
 
@@ -38,5 +38,13 @@ public class Episode extends Produksjon {
     public String toString(){
         return "E" + getEpisodeNummer() + "S" + getSesongNummer() + 
         ": " + getTittel() + " (" + getSpilletid() + " min)";
+    }
+    @Override
+    public int compareTo(Episode other) {
+        int sesongComp = Integer.compare(this.sesongNummer, other.sesongNummer);
+        if (sesongComp == 0) {
+            return Integer.compare(this.episodeNummer, other.episodeNummer);
+        }
+        return sesongComp;
     }
 }
